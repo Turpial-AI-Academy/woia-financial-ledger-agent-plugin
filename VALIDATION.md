@@ -1,29 +1,7 @@
 # Validation obligations
 
-The scaffold supplies generic package/release validation and regression fixtures. Add domain-specific tests and regressions.
+W1 candidate uses the centralized thin provider profile from Ecosystem v0.5.4. Run `mise run test` and `mise run ci:fast`, commit the exact candidate, then run `mise run plugin:certify-thin --repo <absolute-path>` from Ecosystem. The latter validates clean identity, official manifest/skills, payload safety, canonical license, provider-domain regression and portable archive.
 
-Capability regressions should prove bounded amendments of healthy authoritative artifacts, deep-path escalation, preservation of unrelated valid artifacts/evidence, targeted invalidation/revalidation, and independent gate ownership. Assert semantic obligations or observable behavior rather than rigid prose sentences unless exact wording is the contract. Adapt these cases to the capability; do not embed provider-specific policy in generic package validation.
+`tests/ledger.test.mjs` exercises all ten action paths; exact monetary conversion, round rejection, large integers, immutable balanced journal, atomic fact+journal requirement, compensation, source/business-operation deduplication, factual correction versus approved ChargeAdjustment, accepted credit versus observation, restricted purposes/currency/beneficiary/custody, partial Allocation/reversal, current actor/policy/source/approval guards, scoped read, revision/fence failure and concurrent atomic CAS rejection. Synthetic actors/policies/accounts are fixture values, not organization configuration or adapter support.
 
-Report reusable durable execution/observation evidence, invalidated evidence, freshly established evidence, and assumptions/inferences that are not evidence. Independently inspect reused evidence and rerun affected checks plus mandatory invariants when changes invalidate it. This refinement does not reduce the formal gates below.
-
-Before first release:
-
-~~~text
-# after README.plugin.md -> README.md and placeholder replacement
-mise install
-mise run bootstrap
-# optional source diagnostic; not a release gate
-pnpm run checksums:generate
-mise run doctor
-mise run validate
-mise run test
-mise run ci:fast
-mise run ci:extended
-mise run jobs:local
-# commit candidate
-mise run release:check
-~~~
-
-Also run `skills-ref validate` for each skill when available.
-
-No placeholder token or scaffold-only `README.plugin.md` may remain in the release candidate.
+Tests of the pure kernel and an in-memory atomic port are local domain regression, not qualification of a real DBMS/persistence backend or policy/source resolver. Those physical adapters, durable multi-process transaction boundaries, Payments acceptance integration and current policy/source recheck at commit require later qualification and are NOT_RUN. No fresh G6/G7, Operator E2E or Production Ready is claimed. No release/admission/marketplace gate is performed in W1 implementation.
