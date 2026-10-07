@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dev:woia:financial-ledger:command:v1",
+  "title": "Financial Ledger deterministic command envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["action", "org_id", "scope_id", "id", "operation_key", "expected_revision", "payload"],
+  "properties": {
+    "action": {"enum": ["finance.charge.create", "finance.charge.correct", "finance.charge.adjust", "finance.opening-position.record", "finance.journal.post", "finance.journal.compensate", "finance.allocation.apply", "finance.allocation.reverse", "finance.balance.read", "finance.statement.read"]},
+    "org_id": {"type": "string", "minLength": 1},
+    "scope_id": {"type": "string", "minLength": 1},
+    "id": {"type": "string", "minLength": 1},
+    "operation_key": {"type": "string", "minLength": 1},
+    "expected_revision": {"type": "integer", "minimum": 0},
+    "payload": {"type": "object", "description": "Action-specific fields in CONTRACT.md; deterministic kernel enforces source, monetary and relational semantics.", "properties": {"scope": {"$ref": "#/$defs/scope"}, "amount": {"$ref": "#/$defs/signedMinor"}, "delta": {"$ref": "#/$defs/signedMinor"}, "new_amount": {"$ref": "#/$defs/unsignedMinor"}}}
+  },
+  "$defs": {
+    "unsignedMinor": {"type": "string", "pattern": "^(0|[1-9][0-9]*)$"},
+    "signedMinor": {"type": "string", "pattern": "^-?(0|[1-9][0-9]*)$", "not": {"const": "-0"}},
+    "scope": {"type": "object", "required": ["org_id", "scope_id", "currency", "scale", "beneficiary_ref", "custody_ref", "purpose"], "properties": {"org_id": {"type": "string", "minLength": 1}, "scope_id": {"type": "string", "minLength": 1}, "currency": {"type": "string", "minLength": 1}, "scale": {"type": "integer", "minimum": 0, "maximum": 18}, "beneficiary_ref": {"type": "string", "minLength": 1}, "custody_ref": {"type": "string", "minLength": 1}, "purpose": {"type": "string", "minLength": 1}}}
+  }
+}

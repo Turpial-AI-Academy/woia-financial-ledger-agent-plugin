@@ -1,55 +1,37 @@
 ---
 name: woia-financial-ledger
-description: Exact monetary obligations, allocations and immutable balanced journals under Finance authority.
+description: Create and correct sourced Charges, record approved ChargeAdjustments and opening positions, post immutable balanced journals, and apply or compensate eligible Allocations under exact Finance authority. Read scoped statements and balances without performing payments or external contact.
 license: MIT
 ---
 
-# woia-financial-ledger
+# Financial Ledger
 
 ## Operating flow
 
-~~~text
 DISCOVER -> DECIDE -> IMPLEMENT -> VALIDATE -> REPORT
-~~~
 
-## Purpose
+## Ownership
 
-Own obligations, allocations and journal truth with exact money, source deduplication and bounded authority.
+Finance owns obligations, allocations and journal truth. Payments supplies accepted Payment/eligible credit references; a PaymentObservation is not cash acceptance. Ledger does not execute payouts or external-person communication. Owner Settlement retains its external formal calculator. No department copy or model memory is a monetary master.
 
-## Minimum sufficient evidence
+## Before execution
 
-Use a bounded path when an authoritative existing artifact/evidence set is healthy and the requested change is local and understood:
+Load [CONTRACT.md](references/CONTRACT.md) for any monetary command, persisted-state/authority integration, correction or adjustment. Obtain exact current organization policy, Source Authority, actor/current Task grant, revision and single-writer fence. Missing private configuration blocks the command. Marketplace installation, role, competence and tool access never grant authority.
 
-1. identify the artifact/evidence, source candidate, and affected surface;
-2. load only supporting context and references needed for that surface;
-3. amend or re-evaluate the smallest coherent unit;
-4. verify affected behavior plus mandatory cross-cutting invariants;
-5. preserve unrelated valid artifacts/evidence and report what changed.
+## Deterministic operations
 
-Use the deep path for a new artifact, unclear scope or contradictory evidence, public API/event/schema changes, persisted data/migrations, authentication/authorization/secrets/signing/trust boundaries, deployment/rollback/availability risk, cross-provider dependency restructuring, unhealthy or unfamiliar conventions, missing durable required evidence, or a failed invariant that invalidates reused evidence. Load the references/checklists needed by those triggers and retain all required safety validation.
+Use [ledger.mjs](scripts/ledger.mjs), `executeLedger(port, command)`, through a qualified atomic persistence/authority/source port. [command.schema.json](schemas/command.schema.json) describes the public command envelope. No qualified physical adapter is supplied. Pure `planLedger` evaluates immutable snapshots for testing/integration; its successful plan is not durable acceptance until atomic commit succeeds.
 
-## Discover
+- `finance.charge.create`: accepted rule/business-key dedupe.
+- `finance.charge.correct`: factual correction only, original retained.
+- `finance.charge.adjust`: approved non-error economic change under ADR-0029; immutable ChargeAdjustment, exact independent human approval.
+- `finance.opening-position.record`: sourced cutover position without fabricated Payment history.
+- `finance.journal.post` / `finance.journal.compensate`: balanced immutable entries or attributable opposite posting.
+- `finance.allocation.apply` / `finance.allocation.reverse`: accepted eligible funds only, bounded residual/availability, explicit purpose/beneficiary/custody/holds, compensation preserves original.
+- `finance.balance.read` / `finance.statement.read`: exact current scoped read grant.
 
-Inspect actual repository/system state before changing it. Locate authoritative artifacts/evidence and identify affected standards, constraints, supported platforms, integrations, and user requirements. Expand context when a dependency, uncertainty, or deep-path trigger requires it.
+Use strings of minor monetary units and explicit currency/scale/approved rounding. Do not use floating point, create cash through Allocation, move funds across beneficiaries, hide concessions as corrections or write a LedgerEntry independently. A current policy requiring accounting attaches a same-command balanced journal; do not invent accounts, fees or accounting rules.
 
-## Decide
+## Verification and reporting
 
-Select the smallest strategy that satisfies the capability. Preserve healthy existing standards. Do not infer policy from the author's workspace.
-
-## Implement
-
-Apply only authorized changes. Keep domain semantics independent from unrelated tooling.
-
-## Validate
-
-Run capability-appropriate checks and verify changed state. Reuse evidence only when it is durable, inspectable evidence of actual execution/observation with an identifiable candidate, checked surface, relevant inputs/environment, and outcome. Independently establish that it satisfies the gate being owned; prose claims or recollection are not execution evidence.
-
-A later mutation invalidates the checks whose coverage or inputs it affects. Rerun those checks and mandatory related invariants; preserve unaffected valid evidence. Reuse expensive runtime verification across an unchanged candidate and relevant environment. A new turn/session alone does not invalidate evidence. Execute or observe relevant checks when required evidence cannot be inspected or established. Skipped/unavailable checks are not PASS.
-
-## Report
-
-Report current state, source candidate, affected surface, decisions, changes, and exact usage/maintenance commands. Distinguish reusable evidence, invalidated evidence, freshly established evidence, and assumptions/inferences that are not evidence. Include remaining risks and uncertainties.
-
-## Detailed references
-
-Add focused files under `references/` only when more detail is needed and give each reference a concrete scope/risk/ambiguity load trigger. Load triggered safety references; a bounded amendment does not require every reference or full template replay. Add scripts/assets only when they materially improve deterministic execution.
+Validate exact operation digest, source evidence/freshness, aggregate limits, holds/revocations and expected revision immediately before the atomic consequence. Retain operation receipts; retry only identical operations under current authority. Report candidate identity, persisted versus planned result, evidence/source/policy references and remaining blocker. Tests and pure plans are not physical adapter qualification, Operator E2E, fresh G6/G7 or Production Ready. Preserve unaffected facts; a failed plan/CAS cannot publish a partial financial mutation.
