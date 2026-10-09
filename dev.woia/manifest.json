@@ -3,9 +3,26 @@
   "authoring_profile": "thin",
   "origin": "native",
   "capability": "woia-financial-ledger",
-  "version": "0.5.0",
+  "version": "0.5.6",
   "owner": "Finance",
-  "actions": ["finance.charge.create", "finance.charge.correct", "finance.charge.adjust", "finance.opening-position.record", "finance.journal.post", "finance.journal.compensate", "finance.allocation.apply", "finance.allocation.reverse", "finance.balance.read", "finance.statement.read"],
+  "actions": [
+    "finance.charge.create",
+    "finance.charge.correct",
+    "finance.charge.adjust",
+    "finance.opening-position.record",
+    "finance.journal.post",
+    "finance.journal.compensate",
+    "finance.allocation.apply",
+    "finance.allocation.reverse",
+    "finance.balance.read",
+    "finance.statement.read"
+  ],
   "implementation": "skills/woia-financial-ledger/scripts/ledger.mjs",
-  "qualification": {"deterministic_kernel": "IMPLEMENTED", "physical_persistence_adapter": "NOT_RUN", "organization_policy": "REQUIRED_EXTERNAL_RESOURCE", "operator_e2e": "NOT_RUN", "production_ready": false}
+  "qualification": {
+    "deterministic_kernel": "IMPLEMENTED",
+    "physical_persistence_adapter": "NOT_RUN",
+    "organization_policy": "REQUIRED_EXTERNAL_RESOURCE",
+    "operator_e2e": "NOT_RUN",
+    "production_ready": false
+  }
 }

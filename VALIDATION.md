@@ -1,7 +1,0 @@
-# Validation obligations
-
-W1 candidate uses the centralized thin provider profile from Ecosystem v0.5.4. Run `mise run test` and `mise run ci:fast`, commit the exact candidate, then run `mise run plugin:certify-thin --repo <absolute-path>` from Ecosystem. The latter validates clean identity, official manifest/skills, payload safety, canonical license, provider-domain regression and portable archive.
-
-`tests/ledger.test.mjs` exercises all ten action paths; exact monetary conversion, round rejection, large integers, immutable balanced journal, atomic fact+journal requirement, compensation, source/business-operation deduplication, factual correction versus approved ChargeAdjustment, accepted credit versus observation, restricted purposes/currency/beneficiary/custody, partial Allocation/reversal, current actor/policy/source/approval guards, scoped read, revision/fence failure and concurrent atomic CAS rejection. Synthetic actors/policies/accounts are fixture values, not organization configuration or adapter support.
-
-Tests of the pure kernel and an in-memory atomic port are local domain regression, not qualification of a real DBMS/persistence backend or policy/source resolver. Those physical adapters, durable multi-process transaction boundaries, Payments acceptance integration and current policy/source recheck at commit require later qualification and are NOT_RUN. No fresh G6/G7, Operator E2E or Production Ready is claimed. No release/admission/marketplace gate is performed in W1 implementation.
