@@ -24,7 +24,7 @@ Use [ledger.mjs](scripts/ledger.mjs), `executeLedger(port, command)`, through a 
 
 - `finance.charge.create`: accepted rule/business-key dedupe.
 - `finance.charge.correct`: factual correction only, original retained.
-- `finance.charge.adjust`: approved non-error economic change under ADR-0029; immutable ChargeAdjustment, exact independent human approval.
+- `finance.charge.adjust`: approved non-error economic change ; immutable ChargeAdjustment, exact independent human approval.
 - `finance.opening-position.record`: sourced cutover position without fabricated Payment history.
 - `finance.journal.post` / `finance.journal.compensate`: balanced immutable entries or attributable opposite posting.
 - `finance.allocation.apply` / `finance.allocation.reverse`: accepted eligible funds only, bounded residual/availability, explicit purpose/beneficiary/custody/holds, compensation preserves original.

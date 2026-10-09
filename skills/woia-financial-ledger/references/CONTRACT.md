@@ -2,7 +2,6 @@
 
 Load this reference before any monetary mutation, authority/persistence design, correction, adjustment or Allocation review.
 
-Source: WOIA Real Estate `eb0a7278188b2f9968e21ed4299f08184d864cac`, docs/21, docs/22, docs/24, ADR-0026/0027/0029, docs/25/ADR-0030 and B5/spec-backlog. This native thin provider owns obligations, allocations and journal facts. Payments owns accepted Payment and outbound money Effects; no external-person notification is performed here. Finance alone mutates monetary truth. Scoped reads require exact current grants.
 
 ## Execution API
 
