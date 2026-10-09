@@ -1,6 +1,6 @@
 # woia-financial-ledger
 
-Native thin Agent Plugin 1.0.0, version 0.5.6. Source-grounded implementation of WOIA Real Estate Financial Ledger ownership: Charges, immutable factual corrections and ChargeAdjustments, sourced cutover openings, atomic balanced journals, eligible Allocation and compensation, scoped balances/statements.
+Native thin Agent Plugin 1.0.0, version 0.5.7. Source-grounded implementation of WOIA Real Estate Financial Ledger ownership: Charges, immutable factual corrections and ChargeAdjustments, sourced cutover openings, atomic balanced journals, eligible Allocation and compensation, scoped balances/statements.
 
 ## Consumer entry
 
@@ -14,7 +14,7 @@ All ten specified operations have deterministic kernel paths and synthetic regre
 
 ## Authoring
 
-Use the frozen Node 24.21.0 / pnpm 11.19.0 toolchain through mise. `mise run bootstrap`, `mise run doctor`, and `mise run ci:fast` validate local authoring. Ecosystem v0.5.6 `plugin:certify-thin --repo <path>` certifies the clean committed candidate. Tests/maintenance tooling are excluded from portable archives; capability scripts, reference contract, command schema and `dev.woia/manifest.json` remain portable. See repository VALIDATION.md for qualification limits.
+Use the frozen Node 24.21.0 / pnpm 11.19.0 toolchain through mise. `mise run bootstrap`, `mise run doctor`, and `mise run ci:fast` validate local authoring. Ecosystem v0.5.7 `plugin:certify-thin --repo <path>` certifies the clean committed candidate. Tests/maintenance tooling are excluded from portable archives; capability scripts, reference contract, command schema and `dev.woia/manifest.json` remain portable. See repository VALIDATION.md for qualification limits.
 
 ## Maintenance
 
