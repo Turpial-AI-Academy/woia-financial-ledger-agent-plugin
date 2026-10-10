@@ -6,6 +6,7 @@ import { ROOT } from "./lib/plugin.mjs";
 const commands = [
   ["scripts/validate-plugin.mjs"],
   ["scripts/validate-source.mjs"],
+  ["--test", "tests/representation.test.mjs"],
 ];
 if (existsSync(path.join(ROOT, "CHECKSUMS.sha256"))) commands.push(["scripts/check-checksums.mjs"]);
 for (const args of commands) {

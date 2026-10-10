@@ -12,11 +12,13 @@ DISCOVER -> DECIDE -> IMPLEMENT -> VALIDATE -> REPORT
 
 ## Ownership
 
-Finance owns obligations, allocations and journal truth. Payments supplies accepted Payment/eligible credit references; a PaymentObservation is not cash acceptance. Ledger does not execute payouts or external-person communication. Owner Settlement retains its external formal calculator. No department copy or model memory is a monetary master.
+Finance owns obligations, allocations and journal truth. Payments supplies accepted Payment/eligible credit references; a PaymentObservation is not cash acceptance. Ledger does not execute payouts or external-person communication. Formal calculators retain their independently owned business outputs. No department copy or model memory is a monetary master.
 
 ## Before execution
 
 Load [CONTRACT.md](references/CONTRACT.md) for any monetary command, persisted-state/authority integration, correction or adjustment. Obtain exact current organization policy, Source Authority, actor/current Task grant, revision and single-writer fence. Missing private configuration blocks the command. Marketplace installation, role, competence and tool access never grant authority.
+
+The trusted authority port explicitly resolves whether representation/delegation applies. Applicable grants bind principal, exact action/material digest, scope, Task, authoritative source/revision/digest and current validity; request assertions cannot create or disable this requirement.
 
 ## Deterministic operations
 

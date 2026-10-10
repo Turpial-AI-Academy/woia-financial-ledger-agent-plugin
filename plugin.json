@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "woia-financial-ledger",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "description": "Exact monetary obligations, allocations and immutable balanced journals under Finance authority.",
   "author": {
     "name": "Turpial AI Academy",

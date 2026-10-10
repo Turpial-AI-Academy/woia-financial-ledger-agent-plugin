@@ -42,6 +42,19 @@ function validateScope(scope) {
   requireThat(scope && scopeKeys.every((key) => key === 'scale' ? Number.isSafeInteger(scope[key]) && scope[key] >= 0 && scope[key] <= 18 : text(scope[key])), 'MONETARY_SCOPE_REQUIRED');
 }
 function sameScope(a, b) { return Boolean(a && b) && scopeKeys.every((key) => a[key] === b[key]); }
+export function representationDigest(proof) {
+  return digest(Object.fromEntries(['principal_ref', 'grant_ref', 'source_ref', 'revision', 'org_id', 'scope_id', 'task_id', 'action', 'command_digest', 'valid_from', 'valid_until', 'revoked'].map(key => [key, proof[key]])));
+}
+function representedAuthority(command, authority, now) {
+  const proof = authority.representation;
+  requireThat(proof && typeof proof.applicable === 'boolean', 'REPRESENTATION_APPLICABILITY_REQUIRED');
+  if (!proof.applicable) {
+    requireThat(command.payload?.represented_principal_ref === undefined, 'REPRESENTATION_GRANT_REQUIRED');
+    return;
+  }
+  requireThat(proof.authenticated === true && proof.accepted === true && proof.current === true && proof.revoked === false && text(proof.principal_ref) && text(proof.grant_ref) && text(proof.source_ref) && text(proof.revision) && proof.org_id === command.org_id && proof.scope_id === command.scope_id && proof.task_id === authority.actor.task_id && proof.action === command.action && proof.command_digest === commandDigest(command) && Number.isSafeInteger(proof.valid_from) && Number.isSafeInteger(proof.valid_until) && proof.valid_from <= now && now < proof.valid_until && proof.digest_sha256 === representationDigest(proof), 'CURRENT_REPRESENTATION_GRANT_REQUIRED');
+  requireThat(command.payload?.represented_principal_ref === undefined || command.payload.represented_principal_ref === proof.principal_ref, 'REPRESENTED_PRINCIPAL_MISMATCH');
+}
 function authorize(command, authority, now) {
   requireThat(Number.isSafeInteger(now), 'CURRENT_TIME_REQUIRED');
   requireThat(authority?.actor?.authenticated === true && text(authority.actor.id) && text(authority.actor.task_id), 'AUTHENTICATED_TASK_REQUIRED');
@@ -52,6 +65,7 @@ function authorize(command, authority, now) {
   requireThat(authority.grant?.action === command.action && authority.grant.command_digest === commandDigest(command) && authority.grant.revoked === false && authority.grant.valid_from <= now && now < authority.grant.valid_until, 'EXACT_GRANT_REQUIRED');
   requireThat(authority.hold === false && authority.source_conflict === false && authority.aggregate_limit_checked === true, 'HOLD_CONFLICT_OR_LIMIT');
   requireThat(authority.expected_revision === command.expected_revision && text(authority.writer_fence), 'REVISION_FENCE_REQUIRED');
+  representedAuthority(command, authority, now);
   if (mutation) requireThat(authority.decision === 'POLICY_GOVERNED' || authority.decision === 'APPROVAL_REQUIRED', 'MUTATION_POLICY_REQUIRED');
   if (command.action === 'finance.charge.adjust' || authority.decision === 'APPROVAL_REQUIRED') {
     const approval = authority.approval;
@@ -96,6 +110,7 @@ export function planLedger(state, command, authority, source, now) {
   requireThat(command.expected_revision === state.revision, 'STALE_REVISION');
   const payload = command.payload;
   requireThat(payload && typeof payload === 'object', 'PAYLOAD_REQUIRED');
+  requireThat(!Object.hasOwn(payload, 'representation_grant'), 'TRUSTED_REPRESENTATION_PROVENANCE_REQUIRED');
   if (command.action.endsWith('.read')) {
     const scoped = structuredClone(state);
     if (command.action === 'finance.statement.read') return { state, result: freeze(scoped), mutated: false };
@@ -112,6 +127,7 @@ export function planLedger(state, command, authority, source, now) {
   requireThat(payload.scope.org_id === state.org_id && payload.scope.scope_id === state.scope_id, 'PAYLOAD_SCOPE_MISMATCH');
   requireThat(!Object.values(next).some((items) => Array.isArray(items) && items.some((item) => item.id === command.id)), 'DUPLICATE_ID');
   const base = { ...structuredClone(payload), id: command.id, operation_key: command.operation_key, source_evidence: source.evidence_ref, policy_digest: authority.policy.digest };
+  if (authority.representation.applicable) base.representation_grant = Object.fromEntries(['principal_ref', 'grant_ref', 'source_ref', 'revision', 'digest_sha256'].map(key => [key, authority.representation[key]]));
   let result;
   switch (command.action) {
     case 'finance.charge.create': {
@@ -189,7 +205,7 @@ export function planLedger(state, command, authority, source, now) {
 export async function executeLedger(port, command) {
   requireThat(port && ['read', 'resolveAuthority', 'resolveSource', 'now', 'compareAndSwap'].every((key) => typeof port[key] === 'function'), 'QUALIFIED_ATOMIC_PORT_REQUIRED');
   const state = await port.read(command.org_id, command.scope_id);
-  const authority = await port.resolveAuthority(command);
+  const authority = freeze(structuredClone(await port.resolveAuthority(command)));
   const now = await port.now();
   const source = command.action.endsWith('.read') ? undefined : await port.resolveSource(command);
   const plan = planLedger(state, command, authority, source, now);

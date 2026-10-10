@@ -1,6 +1,6 @@
 # woia-financial-ledger
 
-Native thin Agent Plugin 1.0.0, version 0.5.7. Source-grounded implementation of WOIA Real Estate Financial Ledger ownership: Charges, immutable factual corrections and ChargeAdjustments, sourced cutover openings, atomic balanced journals, eligible Allocation and compensation, scoped balances/statements.
+Native thin Agent Plugin 1.0.0, version 0.5.8. Source-grounded Financial Ledger ownership: Charges, immutable factual corrections and ChargeAdjustments, sourced cutover openings, atomic balanced journals, eligible Allocation and compensation, scoped balances/statements.
 
 ## Consumer entry
 

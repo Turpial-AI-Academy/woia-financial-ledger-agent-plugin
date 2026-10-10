@@ -13,9 +13,8 @@ Canonical source of the portable `woia-financial-ledger` Agent Plugin.
 5. Do not encode the author's workspace as a universal requirement.
 6. Keep `SKILL.md` focused and use progressive disclosure.
 7. Do not add MCP without a demonstrated capability need.
-8. Do not require ASPS for standalone operation.
-9. Use minimum-sufficient-evidence: a healthy authoritative artifact and understood local change allow a bounded amendment; uncertainty, contract/persistence/security boundaries, deployment/rollback risk, or missing required evidence require deeper handling.
-10. Load detailed references by scope/risk trigger. Preserve unaffected valid artifacts/evidence and independently inspect durable evidence before reusing it for a gate. Report reusable, invalidated, freshly established, and assumptions/inferences that are not evidence.
+8. Use minimum-sufficient-evidence: a healthy authoritative artifact and understood local change allow a bounded amendment; uncertainty, contract/persistence/security boundaries, deployment/rollback risk, or missing required evidence require deeper handling.
+9. Load detailed references by scope/risk trigger. Preserve unaffected valid artifacts/evidence and independently inspect durable evidence before reusing it for a gate. Report reusable, invalidated, freshly established, and assumptions/inferences that are not evidence.
 
 ## Maintenance
 

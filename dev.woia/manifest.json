@@ -3,7 +3,7 @@
   "authoring_profile": "thin",
   "origin": "native",
   "capability": "woia-financial-ledger",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "owner": "Finance",
   "actions": [
     "finance.charge.create",
