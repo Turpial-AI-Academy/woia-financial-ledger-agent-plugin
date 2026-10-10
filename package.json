@@ -1,7 +1,7 @@
 {
   "name": "woia-financial-ledger-agent-plugin-repo",
   "private": true,
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "Repository maintenance tooling for the woia-financial-ledger portable Agent Plugin.",
   "type": "module",
   "engines": {

@@ -73,6 +73,7 @@ export const AUTHORING_ROOT_FILES = Object.freeze([
 export const AUTHORING_ROOT_DIRS = Object.freeze([
   ".github/",
   "scripts/",
+  "tests/",
   "docs/",
 ]);
 

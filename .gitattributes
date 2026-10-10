@@ -2,6 +2,7 @@
 
 /.github/ export-ignore
 /scripts/ export-ignore
+/tests/ export-ignore
 /docs/ export-ignore
 /AGENTS.md export-ignore
 /CONTRIBUTING.md export-ignore
